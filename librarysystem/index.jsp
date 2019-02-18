@@ -43,10 +43,10 @@
 					text-align: center;
 				}
 	</style>
-  <script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"51333",secure:"51338"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
-  <body style="background: lightblue;" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-8" data-genuitec-path="/librarysystem/WebRoot/index.jsp">
+  </head>
+  <body style="background: lightblue;">
   <c:remove var="user" scope="session" />
-    <div class="font"  data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-8" data-genuitec-path="/librarysystem/WebRoot/index.jsp">
+    <div class="font" >
     <h1 >欢迎来到图书管理系统！</h1></div>
 	<div class="wrapper fadeInDown">
   <div id="formContent">
@@ -70,7 +70,7 @@
     <span style="color: red"><b>${requestScope.errmsg}</b></span><br>
     <!-- 注册 -->
     <div id="formFooter">
-      <a class="underlineHover" href="${pageContext.request.contextPath }/user/regist.jsp">学生注册请点这里</a>
+      <a class="underlineHover" href="${pageContext.request.contextPath }/regist.jsp">学生注册请点这里</a>
     </div>
   </div>
 </div>

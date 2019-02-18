@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'regist.jsp' starting page</title>
+    <title>注册</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -39,12 +39,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	</style>
-  <script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"51333",secure:"51338"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+  </head>
   
-  <body style="background-color:#d6d6d6;" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-11" data-genuitec-path="/librarysystem/WebRoot/regist.jsp">
-   	<div id="login" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-11" data-genuitec-path="/librarysystem/WebRoot/regist.jsp">
-    <h1 class="text-center text-white pt-5">欢迎注册</h1>
-    <div class="container">
+  <body style="background-color:#d6d6d6;">
+   	<div id="login">
+    <h1 class=" text-white pt-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎注册</h1>
+    <div class="container  ">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div class="login-box col-md-12">

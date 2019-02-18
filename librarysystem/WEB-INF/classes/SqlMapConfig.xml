@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+		
+		<typeAliases>
+				<!-- 批量别名定义，扫描整个包下的类，别名为类名（大小写不敏感） -->
+				<package name="com.ssm.beans" />
+		</typeAliases>
+<mappers>
+	<!-- <package name="com.ssm.mapper"/> -->
+	<mapper resource="com/ssm/mapper/UserMapper.xml"/>
+	<mapper resource="com/ssm/mapper/BookMapper.xml"/>
+</mappers>
+</configuration>

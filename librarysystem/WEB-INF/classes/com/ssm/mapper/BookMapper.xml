@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssm.mapper.BookMapper">
+	<insert id="addBook" parameterType="Book">
+		insert into book
+		values(#{b_id},#{b_name},#{b_publisher},#{b_description},#{s_id},#{c_id})
+	</insert>
+	<select id="countAll" resultType="java.lang.Integer">
+		select count(*) from book
+		<where>
+			<choose>
+				<!-- #{student.s_id} -->
+				<when test="student.s_id != null  and student.s_id != '' ">
+					s_id = #{student.s_id}
+				</when>
+				<otherwise>
+					s_id is null
+				</otherwise>
+			</choose>
+			<if test="category.c_id !=null and  category.c_id != '' ">
+				and c_id=#{category.c_id}
+			</if>
+		</where>
+	</select>
+	<resultMap type="Book" id="findByCurrentPageResultMap">
+		<result property="b_id" column="b_id" />
+		<result property="b_name" column="b_name" />
+		<result property="b_publisher" column="b_publisher" />
+		<result property="b_description" column="b_description" />
+		<!-- <result property="c_id" column="c_id"/> -->
+		<result property="s_id" column="s_id" />
+		<association property="category" javaType="category">
+			<id property="c_id" column="c_id" />
+			<result property="c_name" column="c_name" />
+		</association>
+	</resultMap>
+	<select id="findByCurrentPage" resultMap="findByCurrentPageResultMap">
+		select
+		b.b_id,b.b_name,b.b_publisher,b.b_description,b.s_id,c.c_name,c.c_id
+		from book b
+		left outer join category c
+		on b.c_id = c.c_id
+		<where>
+			<choose>
+				<!-- #{student.s_id} -->
+				<when test="student.s_id != null  and student.s_id != '' ">
+					b.s_id = #{student.s_id}
+				</when>
+				<otherwise>
+					b.s_id is null
+				</otherwise>
+			</choose>
+
+			<if test="category.c_id != null  and category.c_id != '' ">
+				and c.c_id=#{category.c_id}
+			</if>
+		</where>
+		order by b.c_id asc limit
+		#{page.startRecord},#{page.recordsPerPage}
+	</select>
+
+
+	<resultMap type="student" id="studentBooksResultMap">
+		<id property="s_id" column="s_id" />
+		<result property="s_name" column="s_name" />
+		<result property="s_password" column="s_password" />
+		<collection property="books" javaType="list" ofType="Book">
+			<id property="b_id" column="b_id" />
+			<result property="b_name" column="b_name" />
+			<result property="b_publisher" column="b_publisher" />
+			<result property="b_description" column="b_description" />
+			<association property="category" javaType="category">
+				<id property="c_id" column="c_id" />
+				<result property="c_name" column="c_name" />
+			</association>
+		</collection>
+	</resultMap>
+	<select id="listById" resultMap="studentBooksResultMap">
+		select
+		b.b_id,b.b_name,b.b_publisher,b.c_id,b.b_description,s.s_id,c.c_name
+		from
+		student s
+		left outer join book b left outer join category c on
+		b.c_id=c.c_id
+		on b.s_id=s.s_id
+		where s.s_id = #{student.s_id}
+		order by
+		b.c_id asc
+		limit
+		#{page.startRecord},#{page.recordsPerPage}
+	</select>
+
+	<resultMap type="book" id="bookResultMap">
+		<!-- <id property="b_id" column="b_id" /> -->
+		<result property="b_name" column="b_name" />
+		<result property="b_publisher" column="b_publisher" />
+		<result property="b_description" column="b_description" />
+		<result property="c_id" column="c_id" />
+		<association property="student" javaType="student">
+			<id property="s_id" column="s_id" />
+			<result property="s_name" column="s_name" />
+			<result property="s_password" column="s_password" />
+		</association>
+	</resultMap>
+	<select id="listById2" resultMap="bookResultMap">
+		select
+		b.b_name,b.b_publisher,b.c_id,b.b_description,b.s_id
+		from book b
+		left
+		outer join student s
+		on b.s_id=s.s_id
+		where s.s_id = #{student.s_id}
+		order by b.c_id asc
+		limit
+		#{page.startRecord},#{page.recordsPerPage}
+	</select>
+
+	<update id="updateBook" parameterType="book">
+		update book set
+		s_id=#{s_id} where b_id=#{b_id}
+	</update>
+	<update id="returnBook" parameterType="book">
+		update book set
+		s_id=#{s_id} where b_id=#{b_id}
+	</update>
+	<delete id="deleteBook" parameterType="book">
+		delete from book where
+		b_id=#{b_id}
+	</delete>
+
+	<select id="countSearch" resultType="java.lang.Integer">
+		select count(*) from book
+		<where>
+			<if test="b_name != null and b_name != ''">
+				b_name like "%" #{b_name} "%"
+			</if>
+			<if test="b_publisher != null and b_publisher != ''">
+				and b_publisher like "%" #{b_publisher} "%"
+			</if>
+			<if test="b_description != null and b_description != ''">
+				and b_description like "%" #{b_description} "%"
+			</if>
+			<if test="c_id != null and c_id != ''">
+				and c_id = #{c_id}
+			</if>
+		</where>
+
+	</select>
+
+	<select id="query" resultType="book">
+		select * from book
+		<where>
+			<if test="book.b_name != null and book.b_name != ''">
+				b_name like "%" #{book.b_name} "%"
+			</if>
+			<if test="book.b_publisher != null and book.b_publisher != ''">
+				and b_publisher like "%" #{book.b_publisher} "%"
+			</if>
+			<if test="book.b_description != null and book.b_description != ''">
+				and b_description like "%" #{book.b_description} "%"
+			</if>
+			<if test="book.c_id != null and book.c_id != ''">
+				and c_id = #{book.c_id}
+			</if>
+		</where>
+		order by c_id
+		limit
+		#{page.startRecord},#{page.recordsPerPage}
+	</select>
+
+	<update id="alterBookInfo" parameterType="book">
+		update book
+		<set>
+			<if test="b_name != null and b_name != ''">
+				b_name = #{b_name} ,<!--需要自己填逗号 -->
+			</if>
+			<if test="b_publisher != null and b_publisher != ''">
+				b_publisher = #{b_publisher} ,
+			</if>
+			<if test="b_description != null and b_description != ''">
+				b_description = #{b_description} ,
+			</if>
+		</set>
+		where b_id=#{b_id}
+	</update>
+
+
+
+
+</mapper>

@@ -1,0 +1,29 @@
+[genuitec-file-id="wc1-3"],[genuitec-lp-path="/librarysystem/WebRoot/css/regist.css"],[genuitec-lp-enabled=false]{
+  /* for codelive */
+}
+
+@CHARSET "UTF-8";
+
+body {
+  background: linear-gradient(to left top, #17a2b8, #14abc4, #12b3d1, #11bcde, #12c5eb); 
+   height: 100vh; 
+}
+#login .container #login-row #login-column .login-box {
+  margin-top: 100px;
+  max-width: 600px;
+  height: 390px;
+  border: 1px solid #9C9C9C;
+  background-image: linear-gradient(to bottom, #aec1c3, #a9b5b7, #bcc5c6, #cfd5d5, #e3e5e5);
+}
+#login .container #login-row  .login-box #login-column #login-form {
+  padding: 20px;
+}
+/* #login .login-box {
+	padding: 10px;
+} */
+#login .container #login-row #login-column .login-box #login-form #register-link {
+  margin-top: -75px;
+}
+/* #login .login-box {
+	margin-top: -55px;
+} */

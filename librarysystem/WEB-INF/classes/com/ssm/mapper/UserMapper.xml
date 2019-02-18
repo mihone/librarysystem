@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssm.mapper.UserMapper">
+	<select id="findStuByName" parameterType="String" resultType="Student">
+		select * from student where s_name=#{name}
+	</select>
+	<select id="findTeaByName" parameterType="String" resultType="Teacher">
+		select * from teacher where t_name=#{name}
+	</select>
+	<insert id="addStudent" parameterType="Student">
+			insert into student values(#{s_id},#{s_name},#{s_password})
+	</insert>
+	<update id="alterPassword"  parameterType="Student">
+			update student set s_password = #{s_password} where s_id=#{s_id}
+	</update>
+
+</mapper>
